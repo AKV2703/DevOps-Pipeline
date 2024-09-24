@@ -39,9 +39,9 @@ pipeline {
         stage('Code Climate Test Coverage') {
             steps {
                 script {
-                    // Download and configure Code Climate Test Reporter
+                    // Download the macOS version of Code Climate Test Reporter
                     sh '''
-                        curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+                        curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-darwin-amd64 > ./cc-test-reporter
                         chmod +x ./cc-test-reporter
                     '''
 
@@ -58,6 +58,7 @@ pipeline {
             }
         }
     }
+
 
     post {
         always {
