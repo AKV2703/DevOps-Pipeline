@@ -1,0 +1,15 @@
+/Users/akv/Desktop/TRIMESTER 1 2024/OBJECT ORIENTED DEVELOPMENT/5.3D Task/SimpleReactionMachine/SimpleReactionMachine/bin/Debug/net7.0/SimpleReactionMachine
+/Users/akv/Desktop/TRIMESTER 1 2024/OBJECT ORIENTED DEVELOPMENT/5.3D Task/SimpleReactionMachine/SimpleReactionMachine/bin/Debug/net7.0/SimpleReactionMachine.deps.json
+/Users/akv/Desktop/TRIMESTER 1 2024/OBJECT ORIENTED DEVELOPMENT/5.3D Task/SimpleReactionMachine/SimpleReactionMachine/bin/Debug/net7.0/SimpleReactionMachine.runtimeconfig.json
+/Users/akv/Desktop/TRIMESTER 1 2024/OBJECT ORIENTED DEVELOPMENT/5.3D Task/SimpleReactionMachine/SimpleReactionMachine/bin/Debug/net7.0/SimpleReactionMachine.dll
+/Users/akv/Desktop/TRIMESTER 1 2024/OBJECT ORIENTED DEVELOPMENT/5.3D Task/SimpleReactionMachine/SimpleReactionMachine/bin/Debug/net7.0/SimpleReactionMachine.pdb
+/Users/akv/Desktop/TRIMESTER 1 2024/OBJECT ORIENTED DEVELOPMENT/5.3D Task/SimpleReactionMachine/SimpleReactionMachine/obj/Debug/net7.0/SimpleReactionMachine.csproj.AssemblyReference.cache
+/Users/akv/Desktop/TRIMESTER 1 2024/OBJECT ORIENTED DEVELOPMENT/5.3D Task/SimpleReactionMachine/SimpleReactionMachine/obj/Debug/net7.0/SimpleReactionMachine.GeneratedMSBuildEditorConfig.editorconfig
+/Users/akv/Desktop/TRIMESTER 1 2024/OBJECT ORIENTED DEVELOPMENT/5.3D Task/SimpleReactionMachine/SimpleReactionMachine/obj/Debug/net7.0/SimpleReactionMachine.AssemblyInfoInputs.cache
+/Users/akv/Desktop/TRIMESTER 1 2024/OBJECT ORIENTED DEVELOPMENT/5.3D Task/SimpleReactionMachine/SimpleReactionMachine/obj/Debug/net7.0/SimpleReactionMachine.AssemblyInfo.cs
+/Users/akv/Desktop/TRIMESTER 1 2024/OBJECT ORIENTED DEVELOPMENT/5.3D Task/SimpleReactionMachine/SimpleReactionMachine/obj/Debug/net7.0/SimpleReactionMachine.csproj.CoreCompileInputs.cache
+/Users/akv/Desktop/TRIMESTER 1 2024/OBJECT ORIENTED DEVELOPMENT/5.3D Task/SimpleReactionMachine/SimpleReactionMachine/obj/Debug/net7.0/SimpleReactionMachine.dll
+/Users/akv/Desktop/TRIMESTER 1 2024/OBJECT ORIENTED DEVELOPMENT/5.3D Task/SimpleReactionMachine/SimpleReactionMachine/obj/Debug/net7.0/refint/SimpleReactionMachine.dll
+/Users/akv/Desktop/TRIMESTER 1 2024/OBJECT ORIENTED DEVELOPMENT/5.3D Task/SimpleReactionMachine/SimpleReactionMachine/obj/Debug/net7.0/SimpleReactionMachine.pdb
+/Users/akv/Desktop/TRIMESTER 1 2024/OBJECT ORIENTED DEVELOPMENT/5.3D Task/SimpleReactionMachine/SimpleReactionMachine/obj/Debug/net7.0/SimpleReactionMachine.genruntimeconfig.cache
+/Users/akv/Desktop/TRIMESTER 1 2024/OBJECT ORIENTED DEVELOPMENT/5.3D Task/SimpleReactionMachine/SimpleReactionMachine/obj/Debug/net7.0/ref/SimpleReactionMachine.dll
