@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 25.0.1706.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleReactionMachine", "SimpleReactionMachine.csproj", "{68010096-1E7F-4102-8334-54EFAEA4C2CC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{68010096-1E7F-4102-8334-54EFAEA4C2CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68010096-1E7F-4102-8334-54EFAEA4C2CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68010096-1E7F-4102-8334-54EFAEA4C2CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68010096-1E7F-4102-8334-54EFAEA4C2CC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9345E2EB-A7B3-4250-B894-316C5C13BB6B}
+	EndGlobalSection
+EndGlobal

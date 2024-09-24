@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/akv/Desktop/TRIMESTER 1 2024/OBJECT ORIENTED DEVELOPMENT/5.3D Task/SimpleReactionMachine/SimpleReactionMachine/SimpleReactionMachine.csproj": {}
+    "/Users/akv/Desktop/TRIMESTER 2 2024/SIT223 PROFESSIONAL PRACTICE IN INFORMATION TECHNOLOGY/Task 6.2HD Create a DevOps Pipeline/DevOps-Pipeline/SimpleReactionMachine/SimpleReactionMachine.csproj": {}
   },
   "projects": {
-    "/Users/akv/Desktop/TRIMESTER 1 2024/OBJECT ORIENTED DEVELOPMENT/5.3D Task/SimpleReactionMachine/SimpleReactionMachine/SimpleReactionMachine.csproj": {
+    "/Users/akv/Desktop/TRIMESTER 2 2024/SIT223 PROFESSIONAL PRACTICE IN INFORMATION TECHNOLOGY/Task 6.2HD Create a DevOps Pipeline/DevOps-Pipeline/SimpleReactionMachine/SimpleReactionMachine.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/akv/Desktop/TRIMESTER 1 2024/OBJECT ORIENTED DEVELOPMENT/5.3D Task/SimpleReactionMachine/SimpleReactionMachine/SimpleReactionMachine.csproj",
+        "projectUniqueName": "/Users/akv/Desktop/TRIMESTER 2 2024/SIT223 PROFESSIONAL PRACTICE IN INFORMATION TECHNOLOGY/Task 6.2HD Create a DevOps Pipeline/DevOps-Pipeline/SimpleReactionMachine/SimpleReactionMachine.csproj",
         "projectName": "SimpleReactionMachine",
-        "projectPath": "/Users/akv/Desktop/TRIMESTER 1 2024/OBJECT ORIENTED DEVELOPMENT/5.3D Task/SimpleReactionMachine/SimpleReactionMachine/SimpleReactionMachine.csproj",
+        "projectPath": "/Users/akv/Desktop/TRIMESTER 2 2024/SIT223 PROFESSIONAL PRACTICE IN INFORMATION TECHNOLOGY/Task 6.2HD Create a DevOps Pipeline/DevOps-Pipeline/SimpleReactionMachine/SimpleReactionMachine.csproj",
         "packagesPath": "/Users/akv/.nuget/packages/",
-        "outputPath": "/Users/akv/Desktop/TRIMESTER 1 2024/OBJECT ORIENTED DEVELOPMENT/5.3D Task/SimpleReactionMachine/SimpleReactionMachine/obj/",
+        "outputPath": "/Users/akv/Desktop/TRIMESTER 2 2024/SIT223 PROFESSIONAL PRACTICE IN INFORMATION TECHNOLOGY/Task 6.2HD Create a DevOps Pipeline/DevOps-Pipeline/SimpleReactionMachine/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/akv/.nuget/NuGet/NuGet.Config"
@@ -54,7 +54,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.314/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.317/RuntimeIdentifierGraph.json"
         }
       }
     }
