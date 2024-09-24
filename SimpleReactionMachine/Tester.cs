@@ -1,194 +1,171 @@
-﻿using System;
+﻿using NUnit.Framework;
+using System;
 
 namespace SimpleReactionMachine
 {
-    class Tester
+    [TestFixture]
+    public class Tester
     {
-        private static IController controller;
-        private static IGui gui;
-        private static string displayText;
-        private static int randomNumber;
+        private static IController controller = null!;
+        private static IGui gui = null!;
+        private static string displayText = string.Empty;
+        private static int randomNumber = 0;
         private static int passed = 0;
+        private static int totalAssertions = 0;
 
-        static void Main(string[] args)
+        [SetUp]
+        public static void Setup()
         {
-            // run simple test
-            SimpleTest();
-            Console.WriteLine("\n=====================================\nSummary: {0} tests passed out of 38", passed);
-        }
-
-        private static void SimpleTest()
-        {
-            //Construct a ReactionController
             controller = new SimpleReactionController();
             gui = new DummyGui();
-
-            //Connect them to each other
             gui.Connect(controller);
             controller.Connect(gui, new RndGenerator());
-
-            //Reset the components()
             gui.Init();
+            passed = 0;
+            totalAssertions = 0;
+        }
 
-            //Test the SimpleReactionController
-            //IDLE
-            DoReset('A', controller, "Insert coin");
-            DoGoStop('B', controller, "Insert coin");
-            DoTicks('C', controller, 1, "Insert coin");
+        [TearDown]
+        public static void TearDown()
+        {
+            Console.WriteLine($"Total Assertions Passed: {passed}/{totalAssertions}");
+        }
 
-            //coinInserted
-            DoInsertCoin('D', controller, "Press GO!");
+        [Test]
+        public static void SimpleReactionTest()
+        {
+            // IDLE state tests
+            DoReset('A', "Insert coin");
+            DoGoStop('B', "Insert coin");
+            DoTicks('C', 1, "Insert coin");
 
-            //READY
-            DoTicks('E', controller, 1, "Press GO!");
-            DoInsertCoin('F', controller, "Press GO!");
+            // CoinInserted tests
+            DoInsertCoin('D', "Press GO!");
 
-            //goStop
+            // READY state tests
+            DoTicks('E', 1, "Press GO!");
+            DoInsertCoin('F', "Press GO!");
+
+            // GoStop tests
             randomNumber = 117;
-            DoGoStop('G', controller, "Wait...");
+            DoGoStop('G', "Wait...");
 
-            //WAIT tick(s)
-            DoTicks('H', controller, randomNumber - 1, "Wait...");
+            // WAIT state tests
+            DoTicks('H', randomNumber - 1, "Wait...");
 
-            //RUN tick(s)
-            DoTicks('I', controller, 1, "0.00");
-            DoTicks('J', controller, 1, "0.01");
-            DoTicks('K', controller, 11, "0.12");
-            DoTicks('L', controller, 111, "1.23");
+            // RUN state tests
+            DoTicks('I', 1, "0.00");
+            DoTicks('J', 1, "0.01");
+            DoTicks('K', 11, "0.12");
+            DoTicks('L', 111, "1.23");
 
-            //goStop
-            DoGoStop('M', controller, "1.23");
+            // GoStop after RUN
+            DoGoStop('M', "1.23");
 
-            //STOP tick(s)
-            DoTicks('N', controller, 299, "1.23");
-            // *********************************new game?
-            //tick
-            DoTicks('O', controller, 1, "Insert coin");
+            // STOP state tests
+            DoTicks('N', 299, "1.23");
+            DoTicks('O', 1, "Insert coin");
 
-            //IDLE coinInserted
-            DoInsertCoin('P', controller, "Press GO!");
+            // Coin inserted after STOP
+            DoInsertCoin('P', "Press GO!");
 
-            //READY goStop
+            // READY -> WAIT tests
             randomNumber = 167;
-            DoGoStop('Q', controller, "Wait...");
-            // *********************************cheating?
-            //WAIT tick(s) goStop
-            DoTicks('R', controller, randomNumber - 1, "Wait...");
-            DoGoStop('S', controller, "Insert coin");
-            // *********************************new game?
-            //IDLE init
-            gui.Init();
-            DoReset('T', controller, "Insert coin");
+            DoGoStop('Q', "Wait...");
 
-            //IDLE -> READY init
+            // WAIT -> IDLE after GoStop
+            DoTicks('R', randomNumber - 1, "Wait...");
+            DoGoStop('S', "Insert coin");
+        }
+
+        [Test]
+        public static void ResetAndRestartTest()
+        {
+            // Restarting from different states
+            gui.Init();
+            DoReset('T', "Insert coin");
+
             randomNumber = 123;
-            DoInsertCoin('U', controller, "Press GO!");
-            // *********************************new game?	
-            gui.Init();
-            DoReset('V', controller, "Insert coin");
+            DoInsertCoin('U', "Press GO!");
 
-            //IDLE -> READY ->WAIT init
+            // Restart again
+            gui.Init();
+            DoReset('V', "Insert coin");
+
+            // READY -> WAIT -> RUN -> STOP and reset
             randomNumber = 123;
-            DoInsertCoin('W', controller, "Press GO!");
-            DoGoStop('X', controller, "Wait...");
-            // *********************************new game?
+            DoInsertCoin('W', "Press GO!");
+            DoGoStop('X', "Wait...");
             gui.Init();
-            DoReset('Y', controller, "Insert coin");
+            DoReset('Y', "Insert coin");
 
-            //IDLE -> READY -> WAIT -> RUN init
             randomNumber = 137;
-            DoInsertCoin('Z', controller, "Press GO!");
-            DoGoStop('a', controller, "Wait...");
-            DoTicks('b', controller, randomNumber + 98, "0.98");
-            // *********************************new game?
+            DoInsertCoin('Z', "Press GO!");
+            DoGoStop('a', "Wait...");
+            DoTicks('b', randomNumber + 98, "0.98");
             gui.Init();
-            DoReset('c', controller, "Insert coin");
+            DoReset('c', "Insert coin");
 
-            //IDLE -> READY -> WAIT -> RUN -> STOP init
             randomNumber = 119;
-            DoInsertCoin('d', controller, "Press GO!");
-            DoGoStop('e', controller, "Wait...");
-            DoTicks('f', controller, randomNumber + 135, "1.35");
-            DoGoStop('g', controller, "1.35");
-            // *********************************new game?
+            DoInsertCoin('d', "Press GO!");
+            DoGoStop('e', "Wait...");
+            DoTicks('f', randomNumber + 135, "1.35");
+            DoGoStop('g', "1.35");
+
+            // Resetting again
             gui.Init();
-            DoReset('h', controller, "Insert coin");
+            DoReset('h', "Insert coin");
+        }
 
-            //IDLE -> READY -> WAIT -> RUN (timeout) -> STOP
+        [Test]
+        public static void TimeoutScenarioTest()
+        {
+            // Timeout during RUN state
             randomNumber = 120;
-            DoInsertCoin('i', controller, "Press GO!");
-            DoGoStop('j', controller, "Wait...");
-            DoTicks('k', controller, randomNumber + 199, "1.99");
-            DoTicks('l', controller, 50, "2.00");
+            DoInsertCoin('i', "Press GO!");
+            DoGoStop('j', "Wait...");
+            DoTicks('k', randomNumber + 199, "1.99");
+            DoTicks('l', 50, "2.00");
         }
 
-        private static void DoReset(char ch, IController controller, string msg)
+        // Utility methods for testing
+
+        private static void DoReset(char ch, string expectedMsg)
         {
-            try
-            {
-                controller.Init();
-                GetMessage(ch, msg);
-            }
-            catch (Exception exception)
-            {
-                Console.WriteLine("test {0}: failed with exception {1})", ch, msg, exception.Message);
-            }
+            controller.Init();
+            GetMessage(ch, expectedMsg);
         }
 
-        private static void DoGoStop(char ch, IController controller, string msg)
+        private static void DoGoStop(char ch, string expectedMsg)
         {
-            try
-            {
-                controller.GoStopPressed();
-                GetMessage(ch, msg);
-            }
-            catch (Exception exception)
-            {
-                Console.WriteLine("test {0}: failed with exception {1})", ch, msg, exception.Message);
-            }
+            controller.GoStopPressed();
+            GetMessage(ch, expectedMsg);
         }
 
-        private static void DoInsertCoin(char ch, IController controller, string msg)
+        private static void DoInsertCoin(char ch, string expectedMsg)
         {
-            try
-            {
-                controller.CoinInserted();
-                GetMessage(ch, msg);
-            }
-            catch (Exception exception)
-            {
-                Console.WriteLine("test {0}: failed with exception {1})", ch, msg, exception.Message);
-            }
+            controller.CoinInserted();
+            GetMessage(ch, expectedMsg);
         }
 
-        private static void DoTicks(char ch, IController controller, int n, string msg)
+        private static void DoTicks(char ch, int n, string expectedMsg)
         {
-            try
-            {
-                for (int t = 0; t < n; t++) controller.Tick();
-                GetMessage(ch, msg);
-            }
-            catch (Exception exception)
-            {
-                Console.WriteLine("test {0}: failed with exception {1})", ch, msg, exception.Message);
-            }
+            for (int t = 0; t < n; t++) controller.Tick();
+            GetMessage(ch, expectedMsg);
         }
 
-        private static void GetMessage(char ch, string msg)
+        private static void GetMessage(char ch, string expectedMsg)
         {
-            if (msg.ToLower() == displayText.ToLower())
-            {
-                Console.WriteLine("test {0}: passed successfully", ch);
-                passed++;
-            }
-            else
-                Console.WriteLine("test {0}: failed with message ( expected {1} | received {2})", ch, msg, displayText);
+            totalAssertions++;  // Increment total assertions count
+            Assert.AreEqual(expectedMsg.ToLower(), displayText.ToLower(),
+                $"Test {ch} failed. Expected: {expectedMsg}, but got: {displayText}");
+            passed++;
         }
 
+        // DummyGui class implementation
         private class DummyGui : IGui
         {
-
-            private IController controller;
+            private IController controller = null!;
 
             public void Connect(IController controller)
             {
@@ -206,6 +183,7 @@ namespace SimpleReactionMachine
             }
         }
 
+        // RndGenerator class implementation
         private class RndGenerator : IRandom
         {
             public int GetRandom(int from, int to)
@@ -213,7 +191,5 @@ namespace SimpleReactionMachine
                 return randomNumber;
             }
         }
-
     }
-
 }

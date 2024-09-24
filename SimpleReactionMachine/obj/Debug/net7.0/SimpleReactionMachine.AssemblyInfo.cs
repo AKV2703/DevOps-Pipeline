@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SimpleReactionMachine")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0b89b0d0512b1d5b215c807dbc37e2b7af0bf3c3")]
 [assembly: System.Reflection.AssemblyProductAttribute("SimpleReactionMachine")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SimpleReactionMachine")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

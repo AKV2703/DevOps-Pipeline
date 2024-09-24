@@ -11,15 +11,14 @@ pipeline {
         stage('Build and Create Docker Image') {
             steps {
                 script {
-                    
-                    sh 'dotnet build SimpleReactionMachine.sln'
                     // Build the .NET project
+                    sh 'dotnet build SimpleReactionMachine.sln'
                     sh 'dotnet publish SimpleReactionMachine.sln -c Release -o ./artifacts'
                     
-                    // Build the Docker image only if the .NET build was successful
+                    // Build the Docker image
                     sh 'docker build -t simple-reaction-machine:latest .'
-
-                    // Archive the Dockerfile and other important build artifacts
+                    
+                    // Archive the Dockerfile and artifacts
                     archiveArtifacts artifacts: 'Dockerfile, artifacts/**', allowEmptyArchive: false
                 }
             }
@@ -28,8 +27,8 @@ pipeline {
         stage('Run Tests') {
             steps {
                 script {
-                    // Run the main solution file which contains Tester.cs
-                    sh 'dotnet run --project SimpleReactionMachine/SimpleReactionMachine.csproj'
+                    // Run the tests and log detailed output in console
+                    sh 'dotnet test --logger "console;verbosity=detailed"'
                 }
             }
         }

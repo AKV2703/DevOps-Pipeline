@@ -1,8 +1,20 @@
 {
   "version": 2,
-  "dgSpecHash": "gmle0ILqRYHk3PlyFaQv7h34O9kVbsiQvpgNeaWcZ6/ohKn0YFCXzL4Q2sFf/I5GzmhqRfcu+EjsSs5XoRAIXw==",
+  "dgSpecHash": "jdR0ckK2J7Q=",
   "success": true,
   "projectFilePath": "/Users/akv/Desktop/TRIMESTER 2 2024/SIT223 PROFESSIONAL PRACTICE IN INFORMATION TECHNOLOGY/Task 6.2HD Create a DevOps Pipeline/DevOps-Pipeline/SimpleReactionMachine/SimpleReactionMachine.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "/Users/akv/.nuget/packages/microsoft.codecoverage/17.4.0/microsoft.codecoverage.17.4.0.nupkg.sha512",
+    "/Users/akv/.nuget/packages/microsoft.net.test.sdk/17.4.0/microsoft.net.test.sdk.17.4.0.nupkg.sha512",
+    "/Users/akv/.nuget/packages/microsoft.netcore.platforms/1.1.0/microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "/Users/akv/.nuget/packages/microsoft.testplatform.objectmodel/17.4.0/microsoft.testplatform.objectmodel.17.4.0.nupkg.sha512",
+    "/Users/akv/.nuget/packages/microsoft.testplatform.testhost/17.4.0/microsoft.testplatform.testhost.17.4.0.nupkg.sha512",
+    "/Users/akv/.nuget/packages/netstandard.library/2.0.0/netstandard.library.2.0.0.nupkg.sha512",
+    "/Users/akv/.nuget/packages/newtonsoft.json/13.0.1/newtonsoft.json.13.0.1.nupkg.sha512",
+    "/Users/akv/.nuget/packages/nuget.frameworks/5.11.0/nuget.frameworks.5.11.0.nupkg.sha512",
+    "/Users/akv/.nuget/packages/nunit/3.13.2/nunit.3.13.2.nupkg.sha512",
+    "/Users/akv/.nuget/packages/nunit3testadapter/4.0.0/nunit3testadapter.4.0.0.nupkg.sha512",
+    "/Users/akv/.nuget/packages/system.reflection.metadata/1.6.0/system.reflection.metadata.1.6.0.nupkg.sha512"
+  ],
   "logs": []
 }
