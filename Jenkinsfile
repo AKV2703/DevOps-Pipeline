@@ -1,14 +1,9 @@
 pipeline {
     agent any
     stages {
-        stage('Verify dotnet') {
+        stage('Test Docker Access') {
             steps {
-                sh 'dotnet --version'
-            }
-        }
-        stage('Build') {
-            steps {
-                sh 'dotnet build SimpleReactionMachine.sln'
+                sh 'docker --version'
             }
         }
     }
