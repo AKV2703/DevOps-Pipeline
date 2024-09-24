@@ -31,7 +31,7 @@ pipeline {
                     // Navigate to the folder containing Tester.cs
                     dir('SimpleReactionMachine') {
                         // Run the Tester.cs as part of the test execution
-                        sh 'dotnet run --project Tester.csproj'
+                        sh 'dotnet run --project Tester.cs'
                     }
                 }
             }
