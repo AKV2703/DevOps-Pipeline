@@ -28,11 +28,8 @@ pipeline {
         stage('Run Tests') {
             steps {
                 script {
-                    // Navigate to the folder containing Tester.cs
-                    dir('SimpleReactionMachine') {
-                        // Run the Tester.cs as part of the test execution
-                        sh 'dotnet run --project Tester.cs'
-                    }
+                    // Run the main solution file which contains Tester.cs
+                    sh 'dotnet run --project SimpleReactionMachine/SimpleReactionMachine.csproj'
                 }
             }
         }
