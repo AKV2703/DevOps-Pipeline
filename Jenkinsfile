@@ -6,6 +6,9 @@ pipeline {
         DOTNET_PATH = "/opt/homebrew/bin"
         // Combine both paths and the default PATH
         PATH = "${DOCKER_PATH}:${DOTNET_PATH}:$PATH"
+        
+        // Add the Code Climate Test Reporter ID here
+        CC_TEST_REPORTER_ID = '239878133e2b6ae32aa6701c0f4d680ab58aa24a67cadefcb23b07e6791eac21'
     }
     stages {
         stage('Build and Create Docker Image') {
@@ -33,5 +36,33 @@ pipeline {
             }
         }
 
+        stage('Code Climate Test Coverage') {
+            steps {
+                script {
+                    // Download and configure Code Climate Test Reporter
+                    sh '''
+                        curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+                        chmod +x ./cc-test-reporter
+                    '''
+
+                    // Prepare the Code Climate Test Reporter
+                    sh './cc-test-reporter before-build'
+
+                    // Run the tests with coverage
+                    sh 'dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura'
+
+                    // Send the coverage report to Code Climate
+                    sh './cc-test-reporter format-coverage --input-type cobertura ./coverage.cobertura.xml'
+                    sh './cc-test-reporter upload-coverage'
+                }
+            }
+        }
+    }
+
+    post {
+        always {
+            // Clean up after the build
+            cleanWs()
+        }
     }
 }
