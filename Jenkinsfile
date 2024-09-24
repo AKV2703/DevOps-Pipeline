@@ -11,6 +11,7 @@ pipeline {
         stage('Build and Create Docker Image') {
             steps {
                 script {
+                    sh 'dotnet build SimpleReactionMachine.sln'
                     // Build the .NET project
                     sh 'dotnet publish SimpleReactionMachine.sln -c Release -o ./artifacts'
                     
