@@ -27,38 +27,38 @@ pipeline {
             }
         }
         
-        stage('Run Tests') {
+        stage('Run Tests and Generate Coverage') {
             steps {
                 script {
-                    // Run the tests and log detailed output in console
-                    sh 'dotnet test --logger "console;verbosity=detailed"'
+                    // Run tests with coverage enabled and output in Cobertura format
+                    sh 'dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=./TestResults/'
+
+                    // Archive the test results
+                    archiveArtifacts artifacts: 'TestResults/coverage.cobertura.xml', allowEmptyArchive: false
                 }
             }
         }
-
+        
         stage('Code Climate Test Coverage') {
             steps {
                 script {
-                    // Download the macOS version of Code Climate Test Reporter
+                    // Download the Code Climate Test Reporter
                     sh '''
                         curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-darwin-amd64 > ./cc-test-reporter
                         chmod +x ./cc-test-reporter
                     '''
-
+                    
                     // Prepare the Code Climate Test Reporter
                     sh './cc-test-reporter before-build'
 
-                    // Run the tests with coverage
-                    sh 'dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura'
-
-                    // Send the coverage report to Code Climate
-                    sh './cc-test-reporter format-coverage --input-type cobertura ./coverage.cobertura.xml'
+                    // Format and upload the coverage report
+                    sh './cc-test-reporter format-coverage --input-type cobertura ./TestResults/coverage.cobertura.xml'
                     sh './cc-test-reporter upload-coverage'
                 }
             }
         }
     }
-
+    
 
     post {
         always {
