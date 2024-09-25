@@ -55,7 +55,7 @@ namespace SimpleReactionMachine
                 RunNonInteractiveMode();
             }
 
-            System.Threading.Thread.Sleep(1000000);
+            System.Threading.Thread.Sleep(1000);
         }
 
         // This method sets up the GUI
