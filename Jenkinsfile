@@ -60,7 +60,7 @@ pipeline {
                     sh './cc-test-reporter before-build'
 
                     // Format and upload the coverage report in Cobertura format
-                    sh './cc-test-reporter format-coverage --input-type cobertura ./TestResults/coverage.cobertura.xml'
+                    sh './cc-test-reporter format-coverage --input-type cobertura ./SimpleReactionMachine/TestResults/coverage.cobertura.xml'
 
                     // Upload the coverage to Code Climate
                     sh './cc-test-reporter upload-coverage'
