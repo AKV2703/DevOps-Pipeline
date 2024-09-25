@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Timers.Timer;
+using System.Timers;
 
 namespace SimpleReactionMachine
 {
