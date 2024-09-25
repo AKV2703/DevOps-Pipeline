@@ -5,7 +5,7 @@ pipeline {
         DOCKER_PATH = "/usr/local/bin"
         DOTNET_PATH = "/opt/homebrew/bin"
         // Combine both paths and the default PATH
-        PATH = "${DOCKER_PATH}:${DOTNET_PATH}:${env.PATH}"
+        PATH = "${DOCKER_PATH}:${DOTNET_PATH}:$PATH"
         
         // Add the Code Climate Test Reporter ID here
         CC_TEST_REPORTER_ID = '239878133e2b6ae32aa6701c0f4d680ab58aa24a67cadefcb23b07e6791eac21'
@@ -14,11 +14,8 @@ pipeline {
         stage('Build and Create Docker Image') {
             steps {
                 script {
-                    // Restore and Build the .NET project
-                    sh 'dotnet restore SimpleReactionMachine.sln'
+                    // Build the .NET project
                     sh 'dotnet build SimpleReactionMachine.sln'
-                    
-                    // Publish the build for Docker
                     sh 'dotnet publish SimpleReactionMachine.sln -c Release -o ./artifacts'
                     
                     // Build the Docker image
@@ -33,42 +30,12 @@ pipeline {
         stage('Run Tests and Generate Coverage') {
             steps {
                 script {
-                    // Ensure the TestResults directory exists
-                    sh 'mkdir -p ./SimpleReactionMachine/TestResults'
-
                     // Run tests with coverage enabled and output in Cobertura format
-                    sh '''
-                    dotnet test SimpleReactionMachine.sln \
-                    /p:CollectCoverage=true \
-                    /p:CoverletOutputFormat=cobertura \
-                    /p:CoverletOutput=./SimpleReactionMachine/TestResults/
-                    '''
+                    sh 'dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=./TestResults/'
 
-                    // List files in TestResults to verify correct path
-                    sh 'ls -l ./SimpleReactionMachine/TestResults/'
-
-                    // Archive the test results from the correct path
-                    archiveArtifacts artifacts: 'SimpleReactionMachine/TestResults/coverage.cobertura.xml', allowEmptyArchive: false
                 }
             }
         }
         
-        stage('SonarQube Analysis') {
-            steps {
-                script {
-                    // Define the scanner tool
-                    def scannerHome = tool 'SonarScanner for .NET'
-                    
-                    // Start SonarQube analysis
-                    sh "dotnet ${scannerHome}/SonarScanner.MSBuild.dll begin /k:\"DevOps-Pipeline\""
-                    
-                    // Build the project, analysis occurs in background
-                    sh 'dotnet build SimpleReactionMachine.sln'
-                    
-                    // Complete SonarQube analysis
-                    sh "dotnet ${scannerHome}/SonarScanner.MSBuild.dll end"
-                }
-            }
-        }
-    }
+
 }
