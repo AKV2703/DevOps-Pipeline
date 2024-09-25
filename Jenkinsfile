@@ -124,7 +124,7 @@ pipeline {
 
 def notifyFailure() {
     // Send an email notification
-    mail to: 'team@example.com',
+    mail to: 'anishkumarvaswani27@gmail.com',
          subject: "Build Failure: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
          body: "The build failed. Check it out here: ${env.BUILD_URL}"
 
