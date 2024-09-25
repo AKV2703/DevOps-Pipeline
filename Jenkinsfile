@@ -47,7 +47,7 @@ pipeline {
                     sh 'docker rm simple-reaction-machine-container || true'
                     
                     // Deploy the Docker image to a test environment
-                    sh 'docker run -d --name simple-reaction-machine-container -p 8080:80 simple-reaction-machine:latest'
+                    sh 'docker run -d --name simple-reaction-machine-container -p 8081:80 simple-reaction-machine:latest'
                     
                 }
             }
