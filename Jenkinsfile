@@ -66,7 +66,7 @@ pipeline {
                     sh 'docker tag simple-reaction-machine:latest akv272003/simple-reaction-machine:1.0.$BUILD_ID'
 
                     // Log in to Docker Hub (if necessary, use Jenkins credentials plugin)
-                    withCredentials([usernamePassword(credentialsId: 'docker-hub-creds', usernameVariable: 'akv272003', passwordVariable: 'Vaswani@08')]) {
+                    withCredentials([usernamePassword(credentialsId: 'docker-hub-creds', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
                         sh 'echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin'
                     }
                     
@@ -91,6 +91,14 @@ pipeline {
                     
                     // Run the new Docker image in the production environment
                     sh 'docker run -d --name simple-reaction-machine-container -p 8081:80 akv272003/simple-reaction-machine:1.0.$BUILD_ID'
+                }
+            }
+        }
+        stage('Cleanup Docker Images') {
+            steps {
+                script {
+                    // Remove dangling Docker images (optional cleanup step)
+                    sh 'docker image prune -f'
                 }
             }
         }
