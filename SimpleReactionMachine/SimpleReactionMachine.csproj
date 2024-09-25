@@ -5,6 +5,8 @@
     <TargetFramework>net7.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <!-- Specify the entry point for the application -->
+    <StartupObject>SimpleReactionMachine.SimpleReactionMachine</StartupObject>
   </PropertyGroup>
 
   <ItemGroup>
