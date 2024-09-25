@@ -31,9 +31,9 @@ pipeline {
             steps {
                 script {
                     withSonarQubeEnv('DevOps-Pipeline') { // 'DevOps-Pipeline' is the name of SonarQube instance
-                        sh 'dotnet sonarscanner begin /k:"DevOps-Pipeline" /d:sonar.host.url="http://localhost:9000" /d:sonar.login="your-sonar-token"'
+                        sh 'dotnet sonarscanner begin /k:"DevOps-Pipeline" /d:sonar.host.url="http://localhost:9000" /d:sonar.login="sqp_9b19ed1abea7ca2cd2323aa190d64cec4641f86e"'
                         sh 'dotnet build SimpleReactionMachine.sln'
-                        sh 'dotnet sonarscanner end /d:sonar.login="your-sonar-token"'
+                        sh 'dotnet sonarscanner end /d:sonar.login="sqp_9b19ed1abea7ca2cd2323aa190d64cec4641f86e"'
                     }
                 }
             }
