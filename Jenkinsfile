@@ -29,7 +29,7 @@ pipeline {
         stage('Code Quality Analysis') {
             steps {
                 script {
-                    withSonarQubeEnv('SonarQube') { // 'SonarQube' is the name of your SonarQube instance
+                    withSonarQubeEnv('DevOps-Pipeline') { // 'SonarQube' is the name of your SonarQube instance
                         sh 'dotnet sonarscanner begin /k:"DevOps-Pipeline" /d:sonar.host.url="http://localhost:9000" /d:sonar.login="sqp_9b19ed1abea7ca2cd2323aa190d64cec4641f86e"'
                         sh 'dotnet build SimpleReactionMachine.sln'
                         sh 'dotnet sonarscanner end /d:sonar.login="sqp_9b19ed1abea7ca2cd2323aa190d64cec4641f86e"'
