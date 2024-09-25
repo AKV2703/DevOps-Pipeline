@@ -1,10 +1,11 @@
 pipeline {
     agent any
     environment {
-        // Define paths for Docker and .NET
+        // Define paths for Docker, .NET, and SonarScanner
         DOCKER_PATH = "/usr/local/bin"
         DOTNET_PATH = "/opt/homebrew/bin"
-        PATH = "${DOCKER_PATH}:${DOTNET_PATH}:$PATH"
+        DOTNET_TOOLS_PATH = "/Users/akv/.dotnet/tools"
+        PATH = "${DOCKER_PATH}:${DOTNET_PATH}:${DOTNET_TOOLS_PATH}:$PATH"
     }
     stages {
         stage('Build and Create Docker Image') {
