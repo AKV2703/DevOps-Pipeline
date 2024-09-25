@@ -47,7 +47,9 @@ pipeline {
                     sh 'docker rm simple-reaction-machine-container || true'
                     
                     // Deploy the Docker image to a test environment
-                    sh 'docker run -d --name simple-reaction-machine-container -p 8080:80 simple-reaction-machine:latest'
+                    // Running Docker container interactively, but keep in mind Jenkins may not handle the interactive part well
+                    sh 'docker run -it --rm simple-reaction-machine:latest'
+                    
                 }
             }
         }
