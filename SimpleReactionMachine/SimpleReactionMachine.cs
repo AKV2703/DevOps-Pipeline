@@ -21,8 +21,43 @@ namespace SimpleReactionMachine
         static private IController contoller;
         static private IGui gui;
 
-        // Adding public access modifier for the Main method
         public static void Main(string[] args)
+        {
+            // Check if the environment is interactive
+            bool isInteractive = Console.IsInputRedirected == false;
+
+            // Initialize the GUI
+            InitializeGui();
+
+            // Create a timer for Tick event
+            System.Timers.Timer timer = new System.Timers.Timer(10);
+            timer.Elapsed += OnTimedEvent;
+            timer.AutoReset = true;
+
+            // Connect GUI with the Controller and vice versa
+            contoller = new SimpleReactionController();
+            gui = new Gui();
+            gui.Connect(contoller);
+            contoller.Connect(gui, new RandomGenerator());
+
+            // Reset the GUI
+            gui.Init();
+            // Start the timer
+            timer.Enabled = true;
+
+            // Run the menu interactively or simulate input if not interactive
+            if (isInteractive)
+            {
+                RunInteractiveMode();
+            }
+            else
+            {
+                RunNonInteractiveMode();
+            }
+        }
+
+        // This method sets up the GUI
+        private static void InitializeGui()
         {
             // Make a menu
             Console.ForegroundColor = ConsoleColor.Yellow;
@@ -45,26 +80,13 @@ namespace SimpleReactionMachine
             Console.Write("{0,-20}", "- For Go/Stop action press ENTER");
             Console.SetCursorPosition(5, 8);
             Console.Write("{0,-20}", "- For Exit press ESC");
+        }
 
-            // Create a timer for Tick event and resolve ambiguity with System.Timers.Timer
-            System.Timers.Timer timer = new System.Timers.Timer(10);
-            timer.Elapsed += OnTimedEvent;
-            timer.AutoReset = true;
-
-            // Connect GUI with the Controller and vice versa
-            contoller = new SimpleReactionController();
-            gui = new Gui();
-            gui.Connect(contoller);
-            contoller.Connect(gui, new RandomGenerator());
-
-            // Reset the GUI
-            gui.Init();
-            // Start the timer
-            timer.Enabled = true;
-
-            // Run the menu
-            bool quitePressed = false;
-            while (!quitePressed)
+        // This method handles interactive mode
+        private static void RunInteractiveMode()
+        {
+            bool quitPressed = false;
+            while (!quitPressed)
             {
                 ConsoleKeyInfo key = Console.ReadKey(true);
                 switch (key.Key)
@@ -76,10 +98,20 @@ namespace SimpleReactionMachine
                         contoller.CoinInserted();
                         break;
                     case ConsoleKey.Escape:
-                        quitePressed = true;
+                        quitPressed = true;
                         break;
                 }
             }
+        }
+
+        // This method handles non-interactive mode (simulates input)
+        private static void RunNonInteractiveMode()
+        {
+            // Automatically simulate a sequence of events
+            contoller.CoinInserted();
+            System.Threading.Thread.Sleep(1000);
+            contoller.GoStopPressed();
+            System.Threading.Thread.Sleep(1000);
         }
 
         // This event occurs every 10 msec
@@ -128,3 +160,8 @@ namespace SimpleReactionMachine
         }
     }
 }
+
+
+
+
+
