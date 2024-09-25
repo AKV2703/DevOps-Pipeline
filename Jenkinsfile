@@ -7,6 +7,7 @@ pipeline {
         DOTNET_TOOLS_PATH = "/Users/akv/.dotnet/tools"
         PATH = "${DOCKER_PATH}:${DOTNET_PATH}:${DOTNET_TOOLS_PATH}:$PATH"
     }
+    
     stages {
         stage('Build and Create Docker Image') {
             steps {
@@ -94,6 +95,7 @@ pipeline {
                 }
             }
         }
+
         stage('Cleanup Docker Images') {
             steps {
                 script {
@@ -103,4 +105,41 @@ pipeline {
             }
         }
     }
+    
+    post {
+        success {
+            echo 'Build succeeded!'
+            // Optionally send a success notification
+        }
+        failure {
+            echo 'Build failed!'
+            notifyFailure()
+        }
+        unstable {
+            echo 'Build is unstable!'
+            notifyFailure()
+        }
+    }
+}
+
+def notifyFailure() {
+    // Send an email notification
+    mail to: 'team@example.com',
+         subject: "Build Failure: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+         body: "The build failed. Check it out here: ${env.BUILD_URL}"
+
+    // Send a Datadog event for the failure
+    def datadogApiKey = 'YOUR_DATADOG_API_KEY'
+    def response = httpRequest(
+        httpMode: 'POST',
+        url: "https://api.datadoghq.com/api/v1/events",
+        requestBody: """{
+            "title": "Build Failure: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+            "text": "The build failed. Check it out here: ${env.BUILD_URL}",
+            "priority": "normal",
+            "alert_type": "error"
+        }""",
+        customHeaders: [[name: 'DD-API-KEY', value: datadogApiKey]],
+        contentType: 'APPLICATION_JSON'
+    )
 }
