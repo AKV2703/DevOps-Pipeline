@@ -38,5 +38,15 @@ pipeline {
                 }
             }
         }
+
+        // New Deployment Stage
+        stage('Deploy') {
+            steps {
+                script {
+                    // Deploy the Docker image to a test environment
+                    sh 'docker run -d --name simple-reaction-machine-container -p 8080:80 simple-reaction-machine:latest'
+                }
+            }
+        }
     }
 }
