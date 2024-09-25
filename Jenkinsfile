@@ -33,16 +33,22 @@ pipeline {
         stage('Run Tests and Generate Coverage') {
             steps {
                 script {
+                    // Ensure the TestResults directory exists
+                    sh 'mkdir -p ./SimpleReactionMachine/TestResults'
+
                     // Run tests with coverage enabled and output in Cobertura format
                     sh '''
                     dotnet test SimpleReactionMachine.sln \
                     /p:CollectCoverage=true \
                     /p:CoverletOutputFormat=cobertura \
-                    /p:CoverletOutput=./TestResults/
+                    /p:CoverletOutput=./SimpleReactionMachine/TestResults/
                     '''
-                    
-                    // Archive the test results
-                    archiveArtifacts artifacts: 'TestResults/coverage.cobertura.xml', allowEmptyArchive: false
+
+                    // List files in TestResults to verify correct path
+                    sh 'ls -l ./SimpleReactionMachine/TestResults/'
+
+                    // Archive the test results from the correct path
+                    archiveArtifacts artifacts: 'SimpleReactionMachine/TestResults/coverage.cobertura.xml', allowEmptyArchive: false
                 }
             }
         }
