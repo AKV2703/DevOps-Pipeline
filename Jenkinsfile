@@ -52,6 +52,16 @@ pipeline {
                 }
             }
         }
+
+        stage('Release') {
+            steps {
+                script {
+                    // Push the Docker image to a registry (optional)
+                    sh 'docker tag simple-reaction-machine:latest <your-docker-repo>:latest'
+                    sh 'docker push <your-docker-repo>:latest'
+                }
+            }
+        }
     }
 }
 
