@@ -6,6 +6,7 @@ pipeline {
         DOTNET_PATH = "/opt/homebrew/bin"
         DOTNET_TOOLS_PATH = "/Users/akv/.dotnet/tools"
         PATH = "${DOCKER_PATH}:${DOTNET_PATH}:${DOTNET_TOOLS_PATH}:$PATH"
+        DATADOG_API_KEY = '69386910de7424da1e9f680435ace225'
     }
     
     stages {
@@ -92,6 +93,41 @@ pipeline {
                     
                     // Run the new Docker image in the production environment
                     sh 'docker run -d --name simple-reaction-machine-container -p 8081:80 akv272003/simple-reaction-machine:1.0.$BUILD_ID'
+                }
+            }
+        }
+
+        stage('Monitoring and Alerting') {
+            steps {
+                script {
+                    // Configure Datadog monitoring
+                    sh '''
+                    # Replace this with your application's specific metrics
+                    curl -X POST "https://api.datadoghq.com/api/v1/series?api_key=${DATADOG_API_KEY}" \
+                    -H "Content-Type: application/json" \
+                    -d '{
+                        "series": [{
+                            "metric": "simple_reaction_machine.performance",
+                            "points": [[(time() * 1000), 0]],
+                            "type": "gauge",
+                            "host": "my-host",
+                            "tags": ["environment:production"]
+                        }]
+                    }'
+                    '''
+                    
+                    // Optionally, set up alerts
+                    sh '''
+                    curl -X POST "https://api.datadoghq.com/api/v1/alerts?api_key=${DATADOG_API_KEY}" \
+                    -H "Content-Type: application/json" \
+                    -d '{
+                        "message": "Alert for Simple Reaction Machine: High performance latency.",
+                        "name": "High Latency Alert",
+                        "query": "avg(last_5m):avg:simple_reaction_machine.performance > 100",
+                        "type": "metric alert",
+                        "tags": ["environment:production"]
+                    }'
+                    '''
                 }
             }
         }
