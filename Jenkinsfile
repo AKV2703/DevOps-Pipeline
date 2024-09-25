@@ -57,7 +57,7 @@ pipeline {
             steps {
                 script {
                     // Create a release in Octopus Deploy
-                    sh 'octo create-release --project SimpleReactionMachine --version 1.0.$BUILD_ID --package akv272003/simple-reaction-machine:latest --server https://your-octopus-url --apiKey your-api-key'
+                    sh 'octo create-release --project SimpleReactionMachine --version 1.0.$BUILD_ID --package akv272003/simple-reaction-machine:latest --server https://devopspipelinebyakv272003.octopus.app/ --apiKey your-api-key'
                     
                     // Deploy the release to production (using the Docker image from the feed with credentials)
                     sh 'octo deploy-release --project SimpleReactionMachine --version 1.0.$BUILD_ID --deployTo Production --server https://devopspipelinebyakv272003.octopus.app/ --apiKey API-JIHMJ7GON5MWMMFAQHVSDRYLTG0KZB'
@@ -67,6 +67,3 @@ pipeline {
     }
 }
 
-
-
-API-JIHMJ7GON5MWMMFAQHVSDRYLTG0KZB
