@@ -9,6 +9,22 @@
           "build/coverlet.msbuild.targets": {}
         }
       },
+      "Datadog.Trace/3.3.1": {
+        "type": "package",
+        "dependencies": {
+          "System.Diagnostics.DiagnosticSource": "4.4.1"
+        },
+        "compile": {
+          "lib/netcoreapp3.1/Datadog.Trace.Manual.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netcoreapp3.1/Datadog.Trace.Manual.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "Microsoft.CodeCoverage/17.4.0": {
         "type": "package",
         "compile": {
@@ -370,6 +386,15 @@
       "StyleCop.Analyzers/1.1.118": {
         "type": "package"
       },
+      "System.Diagnostics.DiagnosticSource/4.4.1": {
+        "type": "package",
+        "compile": {
+          "ref/netcoreapp2.0/_._": {}
+        },
+        "runtime": {
+          "lib/netcoreapp2.0/_._": {}
+        }
+      },
       "System.Reflection.Metadata/1.6.0": {
         "type": "package",
         "compile": {
@@ -425,6 +450,25 @@
         "tasks/netstandard2.0/coverlet.msbuild.tasks.deps.json",
         "tasks/netstandard2.0/coverlet.msbuild.tasks.dll",
         "tasks/netstandard2.0/coverlet.msbuild.tasks.pdb"
+      ]
+    },
+    "Datadog.Trace/3.3.1": {
+      "sha512": "uxvCeeFp3yvJz2uROKsRxZkI5ai5x0QL74ef5NwLnKD3z4Qmj3fTfLYW6pow2JiAsQmOuAMQop5GqnO4L+eyKA==",
+      "type": "package",
+      "path": "datadog.trace/3.3.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "datadog.trace.3.3.1.nupkg.sha512",
+        "datadog.trace.nuspec",
+        "lib/net461/Datadog.Trace.Manual.dll",
+        "lib/net461/Datadog.Trace.Manual.xml",
+        "lib/netcoreapp3.1/Datadog.Trace.Manual.dll",
+        "lib/netcoreapp3.1/Datadog.Trace.Manual.xml",
+        "lib/netstandard2.0/Datadog.Trace.Manual.dll",
+        "lib/netstandard2.0/Datadog.Trace.Manual.xml",
+        "packageIcon.png"
       ]
     },
     "Microsoft.CodeCoverage/17.4.0": {
@@ -948,6 +992,33 @@
         "tools/uninstall.ps1"
       ]
     },
+    "System.Diagnostics.DiagnosticSource/4.4.1": {
+      "sha512": "U/KcC19fyLsPN1GLmeU2zQq15MMVcPwMOYPADVo1+WIoJpvMHxrzvl+BLLZwTEZSneGwaPFZ0aWr0nJ7B7LSdA==",
+      "type": "package",
+      "path": "system.diagnostics.diagnosticsource/4.4.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/net45/System.Diagnostics.DiagnosticSource.dll",
+        "lib/net45/System.Diagnostics.DiagnosticSource.xml",
+        "lib/net46/System.Diagnostics.DiagnosticSource.dll",
+        "lib/net46/System.Diagnostics.DiagnosticSource.xml",
+        "lib/netcoreapp2.0/_._",
+        "lib/netstandard1.1/System.Diagnostics.DiagnosticSource.dll",
+        "lib/netstandard1.1/System.Diagnostics.DiagnosticSource.xml",
+        "lib/netstandard1.3/System.Diagnostics.DiagnosticSource.dll",
+        "lib/netstandard1.3/System.Diagnostics.DiagnosticSource.xml",
+        "lib/portable-net45+win8+wpa81/System.Diagnostics.DiagnosticSource.dll",
+        "lib/portable-net45+win8+wpa81/System.Diagnostics.DiagnosticSource.xml",
+        "ref/netcoreapp2.0/_._",
+        "system.diagnostics.diagnosticsource.4.4.1.nupkg.sha512",
+        "system.diagnostics.diagnosticsource.nuspec",
+        "useSharedDesignerContext.txt",
+        "version.txt"
+      ]
+    },
     "System.Reflection.Metadata/1.6.0": {
       "sha512": "COC1aiAJjCoA5GBF+QKL2uLqEBew4JsCkQmoHKbN3TlOZKa2fKLz5CpiRQKDz0RsAOEGsVKqOD5bomsXq/4STQ==",
       "type": "package",
@@ -972,6 +1043,7 @@
   },
   "projectFileDependencyGroups": {
     "net7.0": [
+      "Datadog.Trace >= 3.3.1",
       "Microsoft.NET.Test.Sdk >= 17.4.0",
       "NUnit >= 3.13.2",
       "NUnit3TestAdapter >= 4.0.0",
@@ -1011,12 +1083,21 @@
         "warnAsError": [
           "NU1605"
         ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
       }
     },
     "frameworks": {
       "net7.0": {
         "targetAlias": "net7.0",
         "dependencies": {
+          "Datadog.Trace": {
+            "target": "Package",
+            "version": "[3.3.1, )"
+          },
           "Microsoft.NET.Test.Sdk": {
             "target": "Package",
             "version": "[17.4.0, )"
@@ -1058,7 +1139,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.317/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.401/RuntimeIdentifierGraph.json"
       }
     }
   }

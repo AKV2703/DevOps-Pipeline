@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "GzMOT5dVVLOlkGEt/FUCOC+MMCuhNJcQZFpBIcxnSH8qMIzQ2spwz+WGHaDRCevkcf3fevw361UtjScJdHbu3A==",
+  "dgSpecHash": "cMvboD+9xBA=",
   "success": true,
   "projectFilePath": "/Users/akv/Desktop/TRIMESTER 2 2024/SIT223 PROFESSIONAL PRACTICE IN INFORMATION TECHNOLOGY/Task 6.2HD Create a DevOps Pipeline/DevOps-Pipeline/SimpleReactionMachine/SimpleReactionMachine.csproj",
   "expectedPackageFiles": [
     "/Users/akv/.nuget/packages/coverlet.msbuild/6.0.2/coverlet.msbuild.6.0.2.nupkg.sha512",
+    "/Users/akv/.nuget/packages/datadog.trace/3.3.1/datadog.trace.3.3.1.nupkg.sha512",
     "/Users/akv/.nuget/packages/microsoft.codecoverage/17.4.0/microsoft.codecoverage.17.4.0.nupkg.sha512",
     "/Users/akv/.nuget/packages/microsoft.net.test.sdk/17.4.0/microsoft.net.test.sdk.17.4.0.nupkg.sha512",
     "/Users/akv/.nuget/packages/microsoft.netcore.platforms/1.1.0/microsoft.netcore.platforms.1.1.0.nupkg.sha512",
@@ -16,6 +17,7 @@
     "/Users/akv/.nuget/packages/nunit/3.13.2/nunit.3.13.2.nupkg.sha512",
     "/Users/akv/.nuget/packages/nunit3testadapter/4.0.0/nunit3testadapter.4.0.0.nupkg.sha512",
     "/Users/akv/.nuget/packages/stylecop.analyzers/1.1.118/stylecop.analyzers.1.1.118.nupkg.sha512",
+    "/Users/akv/.nuget/packages/system.diagnostics.diagnosticsource/4.4.1/system.diagnostics.diagnosticsource.4.4.1.nupkg.sha512",
     "/Users/akv/.nuget/packages/system.reflection.metadata/1.6.0/system.reflection.metadata.1.6.0.nupkg.sha512"
   ],
   "logs": []

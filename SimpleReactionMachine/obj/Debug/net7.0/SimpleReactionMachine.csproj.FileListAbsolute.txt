@@ -113,3 +113,4 @@
 /Users/akv/Desktop/TRIMESTER 2 2024/SIT223 PROFESSIONAL PRACTICE IN INFORMATION TECHNOLOGY/Task 6.2HD Create a DevOps Pipeline/DevOps-Pipeline/SimpleReactionMachine/obj/Debug/net7.0/SimpleRe.A843C549.Up2Date
 /Users/akv/Desktop/TRIMESTER 2 2024/SIT223 PROFESSIONAL PRACTICE IN INFORMATION TECHNOLOGY/Task 6.2HD Create a DevOps Pipeline/DevOps-Pipeline/SimpleReactionMachine/obj/Debug/net7.0/SimpleReactionMachine.genruntimeconfig.cache
 /Users/akv/Desktop/TRIMESTER 2 2024/SIT223 PROFESSIONAL PRACTICE IN INFORMATION TECHNOLOGY/Task 6.2HD Create a DevOps Pipeline/DevOps-Pipeline/SimpleReactionMachine/obj/Debug/net7.0/ref/SimpleReactionMachine.dll
+/Users/akv/Desktop/TRIMESTER 2 2024/SIT223 PROFESSIONAL PRACTICE IN INFORMATION TECHNOLOGY/Task 6.2HD Create a DevOps Pipeline/DevOps-Pipeline/SimpleReactionMachine/bin/Debug/net7.0/Datadog.Trace.Manual.dll
