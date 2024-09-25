@@ -107,11 +107,16 @@ namespace SimpleReactionMachine
         // This method handles non-interactive mode (simulates input)
         private static void RunNonInteractiveMode()
         {
-            // Automatically simulate a sequence of events
+            // Simulate pressing SPACE to insert coin
             contoller.CoinInserted();
-            System.Threading.Thread.Sleep(1000);
+            System.Threading.Thread.Sleep(1000); // Wait for 1 second
+
+            // Simulate pressing ENTER for Go/Stop
             contoller.GoStopPressed();
-            System.Threading.Thread.Sleep(1000);
+            System.Threading.Thread.Sleep(1000); // Wait for 1 second
+
+            // You can simulate other actions or just exit after some time
+            contoller.GoStopPressed();
         }
 
         // This event occurs every 10 msec
