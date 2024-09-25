@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Timers;
+using System.Timers.Timer;
 
 namespace SimpleReactionMachine
 {
@@ -21,7 +21,8 @@ namespace SimpleReactionMachine
         static private IController contoller;
         static private IGui gui;
 
-        static void Main(string[] args)
+        // Adding public access modifier for the Main method
+        public static void Main(string[] args)
         {
             // Make a menu
             Console.ForegroundColor = ConsoleColor.Yellow;
@@ -45,9 +46,8 @@ namespace SimpleReactionMachine
             Console.SetCursorPosition(5, 8);
             Console.Write("{0,-20}", "- For Exit press ESC");
 
-            // Create a time for Tick event
-            Timer timer = new Timer(10);
-            // Hook up the Elapsed event for the timer. 
+            // Create a timer for Tick event and resolve ambiguity with System.Timers.Timer
+            System.Timers.Timer timer = new System.Timers.Timer(10);
             timer.Elapsed += OnTimedEvent;
             timer.AutoReset = true;
 
@@ -57,7 +57,7 @@ namespace SimpleReactionMachine
             gui.Connect(contoller);
             contoller.Connect(gui, new RandomGenerator());
 
-            //Reset the GUI
+            // Reset the GUI
             gui.Init();
             // Start the timer
             timer.Enabled = true;

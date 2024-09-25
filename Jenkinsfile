@@ -18,7 +18,7 @@ pipeline {
                 }
             }
         }
-        
+
         stage('Run Tests') {
             steps {
                 script {
@@ -31,18 +31,21 @@ pipeline {
             steps {
                 script {
                     withSonarQubeEnv('DevOps-Pipeline') { // 'DevOps-Pipeline' is the name of SonarQube instance
-                        sh 'dotnet sonarscanner begin /k:"DevOps-Pipeline" /d:sonar.host.url="http://localhost:9000" /d:sonar.login="sqp_9b19ed1abea7ca2cd2323aa190d64cec4641f86e"'
+                        sh 'dotnet sonarscanner begin /k:"DevOps-Pipeline" /d:sonar.host.url="http://localhost:9000" /d:sonar.login="your-sonar-token"'
                         sh 'dotnet build SimpleReactionMachine.sln'
-                        sh 'dotnet sonarscanner end /d:sonar.login="sqp_9b19ed1abea7ca2cd2323aa190d64cec4641f86e"'
+                        sh 'dotnet sonarscanner end /d:sonar.login="your-sonar-token"'
                     }
                 }
             }
         }
 
-        // New Deployment Stage
         stage('Deploy') {
             steps {
                 script {
+                    // Stop and remove the existing container if it exists
+                    sh 'docker stop simple-reaction-machine-container || true'
+                    sh 'docker rm simple-reaction-machine-container || true'
+                    
                     // Deploy the Docker image to a test environment
                     sh 'docker run -d --name simple-reaction-machine-container -p 8080:80 simple-reaction-machine:latest'
                 }
@@ -50,3 +53,6 @@ pipeline {
         }
     }
 }
+
+
+
