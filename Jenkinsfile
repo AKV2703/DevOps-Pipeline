@@ -52,24 +52,23 @@ pipeline {
                 }
             }
         }
-        
+                
         stage('Code Climate Test Coverage') {
             steps {
                 script {
-                    // Download the Code Climate Test Reporter
+                    // Download and prepare the Code Climate Test Reporter
                     sh '''
                     curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-darwin-amd64 > ./cc-test-reporter
                     chmod +x ./cc-test-reporter
+                    ./cc-test-reporter before-build
                     '''
-                    
-                    // Prepare the Code Climate Test Reporter
-                    sh './cc-test-reporter before-build'
 
-                    // Format and upload the coverage report in Cobertura format
-                    sh './cc-test-reporter format-coverage --input-type cobertura ./SimpleReactionMachine/TestResults/coverage.cobertura.xml'
-
-                    // Upload the coverage to Code Climate
-                    sh './cc-test-reporter upload-coverage'
+                    // Format and upload the coverage report
+                    sh """
+                    ./cc-test-reporter format-coverage --input-type cobertura ./SimpleReactionMachine/TestResults/coverage.cobertura.xml \
+                    --prefix \${WORKSPACE}/SimpleReactionMachine
+                    """
+                    sh './cc-test-reporter upload-coverage --id ${CC_TEST_REPORTER_ID}'
                 }
             }
         }
