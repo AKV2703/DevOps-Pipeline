@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "VOXEkp+0Fak=",
+  "dgSpecHash": "8s2LaFqTB1U=",
   "success": true,
   "projectFilePath": "/Users/akv/Desktop/TRIMESTER 2 2024/SIT223 PROFESSIONAL PRACTICE IN INFORMATION TECHNOLOGY/Task 6.2HD Create a DevOps Pipeline/DevOps-Pipeline/SimpleReactionMachine/SimpleReactionMachine.csproj",
   "expectedPackageFiles": [
+    "/Users/akv/.nuget/packages/coverlet.msbuild/6.0.2/coverlet.msbuild.6.0.2.nupkg.sha512",
     "/Users/akv/.nuget/packages/microsoft.codecoverage/17.4.0/microsoft.codecoverage.17.4.0.nupkg.sha512",
     "/Users/akv/.nuget/packages/microsoft.net.test.sdk/17.4.0/microsoft.net.test.sdk.17.4.0.nupkg.sha512",
     "/Users/akv/.nuget/packages/microsoft.netcore.platforms/1.1.0/microsoft.netcore.platforms.1.1.0.nupkg.sha512",

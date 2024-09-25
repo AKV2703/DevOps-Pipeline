@@ -5,7 +5,7 @@ pipeline {
         DOCKER_PATH = "/usr/local/bin"
         DOTNET_PATH = "/opt/homebrew/bin"
         // Combine both paths and the default PATH
-        PATH = "${DOCKER_PATH}:${DOTNET_PATH}:$PATH"
+        PATH = "${DOCKER_PATH}:${DOTNET_PATH}:${env.PATH}"
         
         // Add the Code Climate Test Reporter ID here
         CC_TEST_REPORTER_ID = '239878133e2b6ae32aa6701c0f4d680ab58aa24a67cadefcb23b07e6791eac21'
@@ -14,8 +14,11 @@ pipeline {
         stage('Build and Create Docker Image') {
             steps {
                 script {
-                    // Build the .NET project
+                    // Restore and Build the .NET project
+                    sh 'dotnet restore SimpleReactionMachine.sln'
                     sh 'dotnet build SimpleReactionMachine.sln'
+                    
+                    // Publish the build for Docker
                     sh 'dotnet publish SimpleReactionMachine.sln -c Release -o ./artifacts'
                     
                     // Build the Docker image
@@ -31,8 +34,13 @@ pipeline {
             steps {
                 script {
                     // Run tests with coverage enabled and output in Cobertura format
-                    sh 'dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=./TestResults/'
-
+                    sh '''
+                    dotnet test SimpleReactionMachine.sln \
+                    /p:CollectCoverage=true \
+                    /p:CoverletOutputFormat=cobertura \
+                    /p:CoverletOutput=./TestResults/
+                    '''
+                    
                     // Archive the test results
                     archiveArtifacts artifacts: 'TestResults/coverage.cobertura.xml', allowEmptyArchive: false
                 }
@@ -44,26 +52,20 @@ pipeline {
                 script {
                     // Download the Code Climate Test Reporter
                     sh '''
-                        curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-darwin-amd64 > ./cc-test-reporter
-                        chmod +x ./cc-test-reporter
+                    curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-darwin-amd64 > ./cc-test-reporter
+                    chmod +x ./cc-test-reporter
                     '''
                     
                     // Prepare the Code Climate Test Reporter
                     sh './cc-test-reporter before-build'
 
-                    // Format and upload the coverage report
+                    // Format and upload the coverage report in Cobertura format
                     sh './cc-test-reporter format-coverage --input-type cobertura ./TestResults/coverage.cobertura.xml'
+
+                    // Upload the coverage to Code Climate
                     sh './cc-test-reporter upload-coverage'
                 }
             }
-        }
-    }
-    
-
-    post {
-        always {
-            // Clean up after the build
-            cleanWs()
         }
     }
 }
